@@ -1,0 +1,4 @@
+repository "FisherGame@tikomangg@cloud"
+  path "/"
+    br "/main"
+    co "/main"
