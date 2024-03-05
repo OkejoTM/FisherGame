@@ -9,12 +9,13 @@ public class HookColliderController : MonoBehaviour
 {
     public Transform hook;
     public Transform hookScale;
-    public GameObject nemoFishOnHook; //3
-    public GameObject angelicFishOnHook; // 2
-    public GameObject platyFishOnHook; //4 
-    public GameObject bullheadFishOnHook; // 1
-    public TMP_Text score;
-    private int scoreInt;
+    public GameObject nemoFishOnHook;       // 3
+    public GameObject angelicFishOnHook;    // 2
+    public GameObject platyFishOnHook;      // 4 
+    public GameObject bullheadFishOnHook;   // 1
+	public GameObject pufferFishOnHook;     // -5
+	public TMP_Text score;
+    private int scoreInt = 0;
 
     private GameObject caughtFish;
     private bool fishIsCaught;
@@ -72,11 +73,17 @@ public class HookColliderController : MonoBehaviour
             caughtFish = bullheadFishOnHook;
 			fishScore = 1;
 		}
-    }
+		if (fish.GetComponent<PufferFish>() != null)
+		{
+			caughtFish = pufferFishOnHook;
+			fishScore = -5;
+		}
+	}
 
     private void addScore()
     {
         scoreInt += fishScore;
+        if (scoreInt < 0) { scoreInt = 0; }
         score.text = "Очки: " + scoreInt;
     }
 }

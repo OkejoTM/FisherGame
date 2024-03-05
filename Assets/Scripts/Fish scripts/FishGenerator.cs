@@ -8,11 +8,11 @@ public class FishGenerator : MonoBehaviour
     public GameObject angelFishPrefab;
     public GameObject platyFishPrebaf;
     public GameObject bullheadFishPrebaf;
+	public GameObject PufferFishPrefab;
 
 
-
-    // Start is called before the first frame update
-    void Start()
+	// Start is called before the first frame update
+	void Start()
     {
         StartCoroutine(createFish()); 
     }
@@ -54,7 +54,7 @@ public class FishGenerator : MonoBehaviour
 
     public GameObject getRandomFish()
     {
-        var chance = Random.Range(0, 4);
+        var chance = Random.Range(0, 5);
         switch (chance)
         {
             case 0:
@@ -65,7 +65,9 @@ public class FishGenerator : MonoBehaviour
                 return platyFishPrebaf;
             case 3:
                 return bullheadFishPrebaf;
-            default: 
+			case 4:
+				return PufferFishPrefab;
+			default: 
                 return null;
         }
     }
