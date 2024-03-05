@@ -1,20 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HookColliderController : MonoBehaviour
 {
     public Transform hook;
     public Transform hookScale;
-    public GameObject nemoFishOnHook;
-    public GameObject angelicFishOnHook;
-    public GameObject platyFishOnHook;
-    public GameObject bullheadFishOnHook;
-
+    public GameObject nemoFishOnHook; //3
+    public GameObject angelicFishOnHook; // 2
+    public GameObject platyFishOnHook; //4 
+    public GameObject bullheadFishOnHook; // 1
+    public TMP_Text score;
+    private int scoreInt;
 
     private GameObject caughtFish;
-    private bool fishIsCaught;    
+    private bool fishIsCaught;
+
+    private int fishScore;
     
     // Start is called before the first frame update
     void Start()
@@ -30,9 +35,8 @@ public class HookColliderController : MonoBehaviour
         {
             fishIsCaught = false;
             caughtFish.SetActive(false);
+            addScore();
         }
-                
-
     }
 
     public void catchFish(GameObject fish)
@@ -48,10 +52,31 @@ public class HookColliderController : MonoBehaviour
 
     public void selectFish(GameObject fish)
     {
-        if (fish.GetComponent<NemoFish>() != null) caughtFish = nemoFishOnHook;
-        if (fish.GetComponent<AngelicFish>() != null) caughtFish = angelicFishOnHook;       
-        if (fish.GetComponent<PlatyFish>() != null) caughtFish = platyFishOnHook;
-        if (fish.GetComponent<BullHeadFish>() != null) caughtFish = bullheadFishOnHook;
+        if (fish.GetComponent<NemoFish>() != null)
+        { 
+            caughtFish = nemoFishOnHook;
+            fishScore = 3;
+        }
+        if (fish.GetComponent<AngelicFish>() != null)
+        { 
+            caughtFish = angelicFishOnHook;
+			fishScore = 2;
+		}
+        if (fish.GetComponent<PlatyFish>() != null) 
+        { 
+            caughtFish = platyFishOnHook;
+			fishScore = 4;
+		}
+        if (fish.GetComponent<BullHeadFish>() != null)
+        { 
+            caughtFish = bullheadFishOnHook;
+			fishScore = 1;
+		}
     }
 
+    private void addScore()
+    {
+        scoreInt += fishScore;
+        score.text = "Очки: " + scoreInt;
+    }
 }
